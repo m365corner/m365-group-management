@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M365 Group Membership Management</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #1e2024;
+        }
+
+        .title-bar {
+            background-color: #1e2024;
+            color: #ffffff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-bar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .title-bar button {
+            background-color: #007bff;
+            color: #1e2024;
+            border: none;
+            padding: 5px 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        .toolbar {
+            background-color: #1e2024;
+            color: #ffffff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .report-section {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .table-striped tbody tr:nth-of-type(even) {
+            background-color: #ffffff;
+        }
+
+        .pagination-controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .note {
+            margin: 20px 0;
+            font-size: 0.9rem;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <!-- Title Bar -->
+    <div class="title-bar">
+        <h1>M365 Group Membership Management</h1>
+        <div>
+            <button class="btn" onclick="login()">Login</button>
+            <button class="btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <select id="groupNameFilter" class="form-select" style="width: 200px;">
+            <option value="">Select Group Name</option>
+        </select>
+        
+        <select id="upnFilter" class="form-select" style="width: 200px;">
+            <option value="">Select UserPrincipalName</option>
+        </select>
+        <button class="btn btn-primary" onclick="searchMembership()">Search</button>
+    </div>
+
+
+    <!-- Note -->
+    <div class="note">
+        Note: The dropdown filters work one at a time. AND/OR conditions are not supported.
+    </div>
+
+    <!-- Report Section -->
+    <div class="report-section">
+        <input type="email" id="recipientEmail" class="form-control" placeholder="Enter Admin Email" style="width: 250px;">
+        <button class="btn btn-secondary" onclick="sendReportAsMail()">Send Report as Mail</button>
+        <button class="btn btn-success" onclick="downloadReportAsCSV()">Download Report as CSV</button>
+        <button class="btn btn-danger" onclick="resetScreen()">Reset Data</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Results Section -->
+        <div>
+            <h3>Results</h3>
+            <table class="table table-striped" id="outputTable">
+                <thead>
+                    <tr id="outputHeader"></tr>
+                </thead>
+                <tbody id="outputBody"></tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
